@@ -1,9 +1,11 @@
 package homework7;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
+    private static final long serialVersionUID = 1L;
     private List<People> people;
     public FamilyTree() {
         this.people = new ArrayList<>();
@@ -22,4 +24,8 @@ public class FamilyTree {
         }
         return null;
     }
+    public List<People> getPeople() {
+        return people;
+    }
+
 }

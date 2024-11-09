@@ -1,9 +1,11 @@
 package homework7;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class People {
+public class People implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String name;
     private int birthYear;
     private People mother;
@@ -23,12 +25,9 @@ public class People {
     public void setMother(People mother) {
         this.mother = mother;
     }
-    public void setFather(People father) {
-        this.father = father;
-    }
-    public void addChild(People child) {
-        this.children.add(child);
-    }
+    public void setFather(People father) {this.father = father;}
+    public void addChild(People child) {this.children.add(child);}
+
     public List<People> getChildren() {
         return children;
     }

@@ -1,5 +1,6 @@
 package homework7;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
@@ -18,11 +19,31 @@ public class Main {
         familyTree.addPerson(boris);
         familyTree.addPerson(nina);
         familyTree.addPerson(natalie);
-        List<People> johnsChildren = familyTree.getChildren(boris);
 
-        for (People child : johnsChildren) {
-            System.out.println("John's child: " + child.getName());
+        FileOperations fileOps = new FileOperationsTmpl();
+
+        try {
+            fileOps.saveToFile(familyTree, "familyTree.dat");
+            System.out.println("Family tree saved to file.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
 
+        FamilyTree loadedFamilyTree = null;
+        try {
+            loadedFamilyTree = fileOps.loadFromFile("familyTree.dat");
+            System.out.println("Family tree loaded from file.");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if (loadedFamilyTree != null) {
+            for (People people : loadedFamilyTree.getPeople()) {
+                System.out.println("Loaded person: " + people.getName() + ", born in " + people.getBirthYear());
+            }
+        }
+
+    }
 }
+
+
