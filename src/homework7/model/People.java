@@ -1,4 +1,4 @@
-package homework7;
+package homework7.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ public class People implements Serializable {
     private People mother;
     private People father;
     private List<People> children;
+
     public People(String name, int birthYear) {
         this.name = name;
         this.birthYear = birthYear;
@@ -19,21 +20,27 @@ public class People implements Serializable {
     public String getName() {
         return name;
     }
+
     public int getBirthYear() {
         return birthYear;
     }
+
     public void setMother(People mother) {
         this.mother = mother;
     }
+
     public void setFather(People father) {this.father = father;}
+
     public void addChild(People child) {this.children.add(child);}
 
     public List<People> getChildren() {
         return children;
     }
+
     public People getMother() {
         return mother;
     }
+
     public People getFather() {
         return father;
     }

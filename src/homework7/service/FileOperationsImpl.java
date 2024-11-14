@@ -1,8 +1,10 @@
-package homework7;
+package homework7.service;
+
+import homework7.model.FamilyTree;
 
 import java.io.*;
 
-public class FileOperationsTmpl implements  FileOperations {
+public class FileOperationsImpl implements FileOperations {
 
     @Override
     public void saveToFile(FamilyTree familyTree, String fileName) throws IOException {

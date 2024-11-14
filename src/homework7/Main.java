@@ -1,14 +1,18 @@
 package homework7;
 
+import homework7.model.FamilyTree;
+import homework7.model.People;
+import homework7.service.FileOperations;
+import homework7.service.FileOperationsImpl;
+
 import java.io.IOException;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         FamilyTree familyTree = new FamilyTree();
 
         People boris = new People("Boris", 1923);
-        People nina = new People("Nina", 1926);
+        People nina = new People("Aleksandra", 1926);
         People natalie = new People("Natalie", 1954);
 
         natalie.setMother(nina);
@@ -20,7 +24,19 @@ public class Main {
         familyTree.addPerson(nina);
         familyTree.addPerson(natalie);
 
-        FileOperations fileOps = new FileOperationsTmpl();
+        System.out.println("Sort by name");
+        familyTree.sortByName();
+        for (People person : familyTree) {
+            System.out.println(person.getName() + " - " + person.getBirthYear());
+        }
+
+        System.out.println("/nSort by birthday");
+        familyTree.sortByBirthYear();
+        for (People person : familyTree) {
+            System.out.println(person.getName() + " - " + person.getBirthYear());
+        }
+
+        FileOperations fileOps = new FileOperationsImpl();
 
         try {
             fileOps.saveToFile(familyTree, "familyTree.dat");
