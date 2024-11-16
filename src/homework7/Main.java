@@ -1,7 +1,7 @@
 package homework7;
 
 import homework7.model.FamilyTree;
-import homework7.model.People;
+import homework7.model.Person;
 import homework7.service.FileOperations;
 import homework7.service.FileOperationsImpl;
 
@@ -9,34 +9,34 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        FamilyTree familyTree = new FamilyTree();
+        FamilyTree<Person> familyTree = new FamilyTree<>();
 
-        People boris = new People("Boris", 1923);
-        People nina = new People("Aleksandra", 1926);
-        People natalie = new People("Natalie", 1954);
+        Person boris = new Person("Boris", 1923);
+        Person nina = new Person("Aleksandra", 1926);
+        Person natalie = new Person("Natalie", 1954);
 
         natalie.setMother(nina);
         natalie.setFather(boris);
         boris.addChild(natalie);
         nina.addChild(natalie);
 
-        familyTree.addPerson(boris);
-        familyTree.addPerson(nina);
-        familyTree.addPerson(natalie);
+        familyTree.addMember(boris);
+        familyTree.addMember(nina);
+        familyTree.addMember(natalie);
 
         System.out.println("Sort by name");
         familyTree.sortByName();
-        for (People person : familyTree) {
+        for (Person person : familyTree) {
             System.out.println(person.getName() + " - " + person.getBirthYear());
         }
 
         System.out.println("/nSort by birthday");
         familyTree.sortByBirthYear();
-        for (People person : familyTree) {
+        for (Person person : familyTree) {
             System.out.println(person.getName() + " - " + person.getBirthYear());
         }
 
-        FileOperations fileOps = new FileOperationsImpl();
+        FileOperations<Person> fileOps = new FileOperationsImpl<>();
 
         try {
             fileOps.saveToFile(familyTree, "familyTree.dat");
@@ -45,7 +45,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        FamilyTree loadedFamilyTree = null;
+        FamilyTree<Person> loadedFamilyTree = null;
         try {
             loadedFamilyTree = fileOps.loadFromFile("familyTree.dat");
             System.out.println("Family tree loaded from file.");
@@ -54,8 +54,9 @@ public class Main {
         }
 
         if (loadedFamilyTree != null) {
-            for (People people : loadedFamilyTree.getPeople()) {
-                System.out.println("Loaded person: " + people.getName() + ", born in " + people.getBirthYear());
+            System.out.println("\nLoaded persons:");
+            for (Person person : loadedFamilyTree) {
+                System.out.println("Loaded person: " + person.getName() + ", born in " + person.getBirthYear());
             }
         }
 

@@ -4,15 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class People implements Serializable {
+public class Person implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private String name;
     private int birthYear;
-    private People mother;
-    private People father;
-    private List<People> children;
+    private Person mother;
+    private Person father;
+    private List<Person> children;
 
-    public People(String name, int birthYear) {
+    public Person(String name, int birthYear) {
         this.name = name;
         this.birthYear = birthYear;
         this.children = new ArrayList<>();
@@ -25,23 +26,25 @@ public class People implements Serializable {
         return birthYear;
     }
 
-    public void setMother(People mother) {
+    public void setMother(Person mother) {
         this.mother = mother;
     }
 
-    public void setFather(People father) {this.father = father;}
+    public void setFather(Person father) {
+        this.father = father;}
 
-    public void addChild(People child) {this.children.add(child);}
+    public void addChild(Person child) {
+        this.children.add(child);}
 
-    public List<People> getChildren() {
+    public List<Person> getChildren() {
         return children;
     }
 
-    public People getMother() {
+    public Person getMother() {
         return mother;
     }
 
-    public People getFather() {
+    public Person getFather() {
         return father;
     }
 }
